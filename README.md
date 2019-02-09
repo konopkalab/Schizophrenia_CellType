@@ -1,4 +1,4 @@
-Primates Cell-type
+# Schizophrenia Cell-type
 
 This repository contains the data, code, and analyses used in ""
 
