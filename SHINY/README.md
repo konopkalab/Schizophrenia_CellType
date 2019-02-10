@@ -1,5 +1,5 @@
-# Schizophrenia DGE ShinyApp
-Scripts for visualization of Schizophrenia CellType DGE.
+# Schizophrenia DEG ShinyApp
+Scripts for visualization of Schizophrenia CellType DEG.
 
 ### Usage
 # Run ShinyApp loader: 
@@ -11,7 +11,7 @@ Scripts for visualization of Schizophrenia CellType DGE.
 
 ### Details
 The app will ask:
-- **Load Expression data** coming from *DGE analysis* and based on *Expression cleaned for covariates and surrogate variables*
+- **Load Expression data** coming from *DEG analysis* and based on *Expression cleaned for covariates and surrogate variables*
 - **Load demographic data** which contains *predictors + covariates + surrogate variables*
 - Searching for the **Gene** of interest
 
