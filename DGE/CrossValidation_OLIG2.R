@@ -1,6 +1,8 @@
-# Cross validation for NeuN
+# Cross validation for OLIG2
 # Slow processing
 source("Utility_Functions.R")
+library(ggplot2)
+library(ggpubr)
 load("OUTPUT_OLIG2/OLIG2_EXON_DATA.RData")
 
 # Load the data and the demographic data
