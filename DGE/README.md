@@ -1,11 +1,11 @@
-# Schizophrenia DGE
+# Schizophrenia DEG
 Scripts for RNA seq analysis.
 
 ### Usage
-# 1) Run DGE analysis: 
-**rmarkdown::render("NeuN_Dge_Analysis.R")**
+# 1) Run DEG analysis: 
+**rmarkdown::render("NeuN_Deg_Analysis.R")**
 
-**rmarkdown::render("OLIG2_Dge_Analysis.R")**
+**rmarkdown::render("OLIG2_Deg_Analysis.R")**
 
 ### Details
 The script involves 3 steps
@@ -13,7 +13,7 @@ The script involves 3 steps
 - **QC** of tranformed counts
 - **Modeling** of transformed counts based on *limma*
 
-# 2) After DGE analysis use:
+# 2) After DEG analysis use:
 **R CMD BATCH --vanilla CrossValidation_NeuN.R**
 
 **R CMD BATCH --vanilla CrossValidation_OLIG2.R**
