@@ -4,7 +4,7 @@ This repository contains the data, code, and analyses used for "Cell-type specif
 
 Organization:
 
-    1. DGE/ contains the codes and input data for analyises and visualization for the differential gene expression analysis (DGE) betweem schizophrenia and healthy controls.
+    1. DEG/ contains the codes and input data for analyises and visualization for the differential gene expression analysis (DEG) betweem schizophrenia and healthy controls.
 
     2. MAGMA/ contains example codes for the GWAS enrichment.
 
