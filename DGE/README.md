@@ -3,9 +3,9 @@ Scripts for RNA seq analysis.
 
 ### Usage
 # 1) Run DEG analysis: 
-**rmarkdown::render("NeuN_Deg_Analysis.R")**
+**rmarkdown::render("NeuN_DEG_Analysis.R")**
 
-**rmarkdown::render("OLIG2_Deg_Analysis.R")**
+**rmarkdown::render("OLIG2_DEG_Analysis.R")**
 
 ### Details
 The script involves 3 steps
