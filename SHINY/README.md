@@ -4,9 +4,10 @@ Scripts for visualization of Schizophrenia CellType DGE.
 ### Usage
 # Run ShinyApp loader: 
 **R CMD BATCH --vanilla ToRun.R**
-**Load the expression**
-**Load the demographic**
-**Have fun!**
+   
+    1) Load the expression
+    2) Load the demographic
+    3) Have fun!
 
 ### Details
 The app will ask:
