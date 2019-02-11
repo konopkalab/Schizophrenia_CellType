@@ -6,6 +6,8 @@ Organization:
 
     1. DEG/ contains the codes and input data for analyises and visualization for the differential gene expression analysis (DEG) betweem schizophrenia and healthy controls.
 
-    2. MAGMA/ contains example codes for the GWAS enrichment.
+    3. EXTRA_DATA/ contains data from CMC and BrainSeq and downstream re-analysis.
 
-    3. SHINY/ contains code and input data for exploratory shiny app based on boxplots/violin plots with statistics. 
+    4. MAGMA/ contains example codes for the GWAS enrichment.
+
+    5. SHINY/ contains code and input data for exploratory shiny app based on boxplots/violin plots with statistics. 
