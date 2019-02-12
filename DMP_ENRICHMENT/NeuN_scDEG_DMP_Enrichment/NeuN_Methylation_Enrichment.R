@@ -1,9 +1,10 @@
 # Enrichment analysis
-library(WGCNA);
-library(cluster);
+library(WGCNA)
+library(cluster)
 library(ggplot2)
 library(reshape2)
 library(RColorBrewer)
+library(magrittr)
 enableWGCNAThreads()
 # Load data
 load("NEUN_EXON_DATA.RData")
@@ -57,10 +58,10 @@ cl=length(Genes$Var1)
 TEMP=list()
 INT=list()
 for (i in 1:ln)
-{
-TEMP[[i]]=tab[tab$Gene %in% GeneSets[[i]]$Gene,]
-INT[[i]]=as.data.frame(table(TEMP[[i]]$DEFINITION))
-}
+	{
+	TEMP[[i]]=tab[tab$Gene %in% GeneSets[[i]]$Gene,]
+	INT[[i]]=as.data.frame(table(TEMP[[i]]$DEFINITION))
+	}
 names(INT)=names(GeneSets)
 names(TEMP)=names(GeneSets)
 
@@ -77,11 +78,11 @@ NROWS <- sapply(GeneSets,nrow)
 #          +-------+-------+
 
 for (i in 1:length(INT))
-{
-INT[[i]]$b <- NROWS[[i]]-INT[[i]]$Freq
-INT[[i]]$c <- Genes$Freq-INT[[i]]$Freq 
-INT[[i]]$d <- 15585-Genes$Freq-nrow(GeneSets[[i]])
-}
+	{
+	INT[[i]]$b <- NROWS[[i]]-INT[[i]]$Freq
+	INT[[i]]$c <- Genes$Freq-INT[[i]]$Freq 
+	INT[[i]]$d <- 15585-Genes$Freq-nrow(GeneSets[[i]])
+	}	
 
 # sum(Genes$Freq)
 RunFisher <- function(row, alt = 'greater', cnf = 0.85) {
@@ -97,11 +98,11 @@ RunFisher <- function(row, alt = 'greater', cnf = 0.85) {
 # run
 FisherMat=list()
 for (i in 1:length(INT))
-{
-FisherMat[[i]] <- t(apply(INT[[i]][,2:5], 1, RunFisher))
-rownames(FisherMat[[i]]) <- INT[[i]]$Var1
-FisherMat[[i]] <- FisherMat[[i]][rownames(FisherMat[[i]]) != "grey",]
-}
+	{
+	FisherMat[[i]] <- t(apply(INT[[i]][,2:5], 1, RunFisher))
+	rownames(FisherMat[[i]]) <- INT[[i]]$Var1
+	FisherMat[[i]] <- FisherMat[[i]][rownames(FisherMat[[i]]) != "grey",]
+	}
 names(FisherMat)<-names(INT)
 
 # Create matrices of Pval
@@ -110,10 +111,10 @@ FisherP<-matrix()
 rowNames <- rownames(FisherMat[[1]])
 colNames <- names(FisherMat)
 for (i in 1:length(INT))
-{
-tmp[[i]] <- cbind(as.numeric(FisherMat[[i]][,5]))
-FisherP <- do.call(cbind,tmp)
-}
+	{
+	tmp[[i]] <- cbind(as.numeric(FisherMat[[i]][,5]))
+	FisherP <- do.call(cbind,tmp)
+	}
 rownames(FisherP) <- rowNames
 colnames(FisherP) <- colNames
 
@@ -123,15 +124,14 @@ FisherOR<-matrix()
 rowNames <- rownames(FisherMat[[1]])
 colNames <- names(FisherMat)
 for (i in 1:length(INT))
-{
-tmp[[i]] <- cbind(as.numeric(FisherMat[[i]][,6]))
-FisherOR <- do.call(cbind,tmp)
-}
+	{
+	tmp[[i]] <- cbind(as.numeric(FisherMat[[i]][,6]))
+	FisherOR <- do.call(cbind,tmp)
+	}
 rownames(FisherOR) <- rowNames
 colnames(FisherOR) <- colNames
 
 # Pval Adjusted
-library(magrittr)
 FisherAdj <- FisherP %>% 
 			as.matrix %>% 
 			as.vector %>% 
