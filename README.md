@@ -1,4 +1,4 @@
-# Schizophrenia Cell-type
+# Schizophrenia Cell-Type
 
 This repository contains the data, code, and analyses used for "Cell-type specific epigenetic links to schizophrenia risk in brain"
 
