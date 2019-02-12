@@ -1,7 +1,8 @@
 # DMP enrichment for scDEGs
 The directories contain:
-       
+
        1) Input data from differential expression and methylation for NeuN and OLIG2.
+       
        2) Codes to set up the enrichment analysis.
        
 ### Usage
