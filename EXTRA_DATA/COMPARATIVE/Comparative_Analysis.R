@@ -1,11 +1,9 @@
-#########################################
-##             Database                ##
-#########################################
 suppressPackageStartupMessages(library(xlsx))
 suppressPackageStartupMessages(library(reshape2))
 suppressPackageStartupMessages(library(ggridges))
 suppressPackageStartupMessages(library(ggpubr))
 suppressPackageStartupMessages(library(cowplot))
+suppressPackageStartupMessages(library(UpSetR))
 
 file_names=as.list(dir(pattern=".txt"))
 l <- lapply(file_names,read.table,sep="\t")
@@ -59,8 +57,8 @@ a <- ggscatter(res, x = "logFC_CMC", y = "logFC_NeuN",
    conf.int = TRUE, # Add confidence interval
    cor.coef = TRUE, # Add correlation coefficient. see ?stat_cor
    cor.coeff.args = list(method = "spearman",label.sep = "\n"))+
-xlab("CMC log2FC")+ 
-ylab("NeuN log2FC")+
+xlab("CMC log2(Fold Change)")+ 
+ylab("NeuN log2(Fold Change)")+
 geom_vline(xintercept = 0, colour = "grey",linetype="dotted",size=1,alpha=0.5) + 
 geom_hline(yintercept = 0, colour = "grey",linetype="dotted",size=1,alpha=0.5) +
 xlim(-0.2,+0.2)+
@@ -73,8 +71,8 @@ b <- ggscatter(res, x = "logFC_BrainSeq", y = "logFC_NeuN",
    conf.int = TRUE, # Add confidence interval
    cor.coef = TRUE, # Add correlation coefficient. see ?stat_cor
    cor.coeff.args = list(method = "spearman",label.sep = "\n"))+
-xlab("BrainSeq log2FC")+ 
-ylab("NeuN log2FC")+
+xlab("BrainSeq log2(Fold Change)")+ 
+ylab("NeuN log2(Fold Change)")+
 geom_vline(xintercept = 0, colour = "grey",linetype="dotted",size=1,alpha=0.5) + 
 geom_hline(yintercept = 0, colour = "grey",linetype="dotted",size=1,alpha=0.5) +
 xlim(-0.2,+0.2)+
@@ -91,8 +89,8 @@ c <- ggscatter(res, x = "logFC_CMC", y = "logFC_OLIG2",
    conf.int = TRUE, # Add confidence interval
    cor.coef = TRUE, # Add correlation coefficient. see ?stat_cor
    cor.coeff.args = list(method = "spearman",label.sep = "\n"))+
-xlab("CMC log2FC")+ 
-ylab("OLIG2 log2FC")+
+xlab("CMC log2(Fold Change)")+ 
+ylab("OLIG2 log2(Fold Change)")+
 geom_vline(xintercept = 0, colour = "grey",linetype="dotted",size=1,alpha=0.5) + 
 geom_hline(yintercept = 0, colour = "grey",linetype="dotted",size=1,alpha=0.5) +
 xlim(-0.2,+0.2)+
@@ -106,8 +104,8 @@ d <- ggscatter(res, x = "logFC_BrainSeq", y = "logFC_OLIG2",
    conf.int = TRUE, # Add confidence interval
    cor.coef = TRUE, # Add correlation coefficient. see ?stat_cor
    cor.coeff.args = list(method = "spearman",label.sep = "\n"))+
-xlab("BrainSeq log2FC")+ 
-ylab("OLIG2 log2FC")+
+xlab("BrainSeq log2(Fold Change)")+ 
+ylab("OLIG2 log2(Fold Change)")+
 geom_vline(xintercept = 0, colour = "grey",linetype="dotted",size=1,alpha=0.5) + 
 geom_hline(yintercept = 0, colour = "grey",linetype="dotted",size=1,alpha=0.5) +
 xlim(-0.2,+0.2)+
@@ -115,3 +113,34 @@ ylim(-1.5,+1.5)
 
 plot <- plot_grid(a,b,c,d,labels=c("A","B","C","D"), ncol = 4,nrow=1,align = "h")
 save_plot("FoldChange_Comparative_Analysis.pdf", plot, ncol = 2,base_height=2.5,base_width=5)
+
+# UpSet
+suppressPackageStartupMessages(library(UpSetR))
+
+file_names=as.list(dir(pattern="DEG.txt"))
+l <- lapply(file_names,read.table,sep="\t")
+
+brainseq <- as.data.frame(l[[1]][l[[1]]$P.Value < 0.05,])
+cmc <- as.data.frame(l[[2]][l[[2]]$P.Value < 0.05,])
+neun <- as.data.frame(l[[3]][l[[3]]$P.Value < 0.05,])
+olig <- as.data.frame(l[[4]][l[[4]]$P.Value < 0.05,])
+
+brainseq.tmp <- data.frame(Gene = rownames(brainseq),Class = rep("BrainSeq",nrow(brainseq)))
+cmc.tmp <- data.frame(Gene = rownames(cmc),Class = rep("CMC",nrow(cmc)))
+neun.tmp <- data.frame(Gene = rownames(neun),Class = rep("NeuN",nrow(neun)))
+olig.tmp <- data.frame(Gene = rownames(olig),Class = rep("OLIG2",nrow(olig)))
+df <- rbind(brainseq.tmp,cmc.tmp,neun.tmp,olig.tmp)
+
+final.l <- split(as.character(df$Gene),df$Class)
+Class <- names(final.l)
+ToTGene <- as.numeric(sapply(final.l, length))
+metadata <- as.data.frame(cbind(Class, ToTGene))
+names(metadata) <- c("Class", "ToTGene")
+metadata$ToTGene <- as.numeric(as.character(metadata$ToTGene))
+
+pdf("UpSet_NominalP.pdf",width=6,height=5,useDingbats=FALSE)
+upset(fromList(final.l),,nsets = 6, set.metadata = list(data = metadata, plots = list(list(type = "hist", 
+    column = "ToTGene", assign = 20), list(type = "matrix_rows", 
+    column = "sets", colors = c(NeuN = "cyan4", OLIG2 = "magenta4", CMC = "grey60",BrainSeq="steelblue"), 
+    alpha = 0.5))))
+dev.off()
