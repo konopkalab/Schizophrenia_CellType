@@ -11,6 +11,8 @@ The directories contain:
 
 **R CMD BATCH --vanilla OLIG2_Methylation_Enrichment.R**
 
+**R CMD BATCH --vanilla CellType_DML_Enrichment.R**
+
 ### Details
 The script involves 2 steps
 - **Data formatting**
@@ -18,4 +20,4 @@ The script involves 2 steps
 - **Output** as heatmap containing Odd Ratios and FDR from the *Fisher's exact test*
 
 ### Notes
-The methylation data (e.g. DSS_20x_08ind_Filtered) is prefiltered to allow the upload to this repo.
+The methylation data (e.g. DSS_20x_08ind_Filtered/CellType_DMR) are prefiltered to allow the upload to this repo.
