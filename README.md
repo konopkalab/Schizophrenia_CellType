@@ -2,8 +2,6 @@
 
 This repository contains the data, code, and analyses used for "Cell-type specific epigenetic links to schizophrenia risk in brain"
 
-Organization:
-
     1. DEG/ contains the codes and input data for analyises and visualization for the differential gene expression analysis (DEG) betweem schizophrenia and healthy controls.
 
     2. DMP_ENRICHMENT/ contains data from WGBS analysis and downstream analysis for scDEGs and CellType DEGs.
