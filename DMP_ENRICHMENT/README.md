@@ -1,31 +1,17 @@
 # DMP enrichment for scDEGs
 The directories contain:
        
-       1) **Input data* from differential expression and methylation for NeuN and OLIG2.
-       2) **Codes** to set up the enrichment analysis.
+       1) Input data from differential expression and methylation for NeuN and OLIG2.
+       2) Codes to set up the enrichment analysis.
        
-
 ### Usage
 # 1) Run DEG analysis: 
-**rmarkdown::render("NeuN_DEG_Analysis.R")**
+**R CMD BATCH --vanilla NeuN_Methylation_Enrichment.R**
 
-**rmarkdown::render("OLIG2_DEG_Analysis.R")**
-
-**rmarkdown::render("CellType_DEG_Analysis.R")**
-
-### Details
-The script involves 3 steps
-- **Data transformation** using *log2(CPM)*
-- **QC** of tranformed counts
-- **Modeling** of transformed counts based on *limma*
-
-# 2) After DEG analysis use (only for NeuN and OLIG2 szDEG):
-**R CMD BATCH --vanilla CrossValidation_NeuN.R**
-
-**R CMD BATCH --vanilla CrossValidation_OLIG2.R**
+**R CMD BATCH --vanilla OLIG2_Methylation_Enrichment.R**
 
 ### Details
 The script involves 2 steps
-- **Leave-One-Out CV** for *limma* based on 200 bootstraps
-- **Permutation CV** for *limma* based on 200 permutations
-
+- **Data formatting**
+- **Enrichment test** based on *Fisher's exact test*
+- **Output** as heatmap containing Odd Ratios and FDR from the *Fisher's exact test*
