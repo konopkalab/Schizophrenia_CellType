@@ -16,3 +16,6 @@ The script involves 2 steps
 - **Data formatting**
 - **Enrichment test** based on *Fisher's exact test*
 - **Output** as heatmap containing Odd Ratios and FDR from the *Fisher's exact test*
+
+### Notes
+The methylation data (e.g. DSS_20x_08ind_Filtered) is prefiltered to allow the upload to this repo.
