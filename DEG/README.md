@@ -7,13 +7,15 @@ Scripts for RNA seq analysis.
 
 **rmarkdown::render("OLIG2_DEG_Analysis.R")**
 
+**rmarkdown::render("CellType_DEG_Analysis.R")**
+
 ### Details
 The script involves 3 steps
 - **Data transformation** using *log2(CPM)*
 - **QC** of tranformed counts
 - **Modeling** of transformed counts based on *limma*
 
-# 2) After DEG analysis use:
+# 2) After DEG analysis use (only for NeuN and OLIG2 szDEG):
 **R CMD BATCH --vanilla CrossValidation_NeuN.R**
 
 **R CMD BATCH --vanilla CrossValidation_OLIG2.R**
