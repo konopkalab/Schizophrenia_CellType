@@ -143,7 +143,7 @@ colnames(FisherAdj) <- colNames
 
 FisherAdj[FisherAdj>0.05]=1
 FisherOR[FisherOR < 1]=0
-pdf("Heatmap_GeneSets_ProtCod_Top1k_FDR001.pdf",width=5,height=3)
+pdf("NeuN_scDEG_DML_Top1k.pdf",width=5,height=3)
 df=-log10(FisherAdj)
 LabelMat = paste(signif(FisherOR, 2), "\n(",signif(FisherAdj, 1), ")", sep = "")
 LabelMat[LabelMat == "0\n(1)"] <- NA
