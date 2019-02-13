@@ -9,7 +9,7 @@
 #' ---
 
 #' Data was downloaded from Synapse portal.
-#' We computed normalised exon-level counts (CPM), removing the low abundance reads using a condition cutoff. 
+#' We computed normalized exon-level counts (CPM), removing the low abundance reads using a "by-condition" cutoff. 
 #' Only autosomal genes are retained.
 #' In addition to the biological and technical covariates we calculated Surrogate Variables (SVs) based on SVA. 
 #' We then used limma to detect schizophrenia differential gene expression.
