@@ -8,7 +8,7 @@ This repository contains the data, code, and analyses used for "Cell-type specif
 
     3. EXTRA_DATA/ contains data from CMC and BrainSeq re-analysis and comparison with NeuN and OLIG2 data.
 
-    4. MAGMA/ contains example codes for the GWAS enrichment.
+    4. MAGMA/ contains code for the GWAS enrichment.
 
     5. SHINY/ contains code and input data for exploratory shiny app based on boxplots/violin plots with statistics.
     
